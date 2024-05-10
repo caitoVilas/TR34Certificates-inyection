@@ -13,6 +13,8 @@ public class KeyPairServiceImpl implements KeyPairService {
     @Override
     public KeyPair generateKeyPair() {
         log.info("--> private and public key generation service");
+        //todo: generar par de llaves privadas y publicas
+        // RSA o Voltage que es que usa fiserv?
         return null;
     }
 }

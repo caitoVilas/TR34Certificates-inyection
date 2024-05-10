@@ -25,6 +25,7 @@ public class KeyInyectorServiceImpl implements KeyInyectionService {
         var keyPair = keyPairService.generateKeyPair();
         var certificate = pkiService.getCertificate(keyPair.getPublic(), request.getTerminalId());
         var tr34Params = TR34Params.builder()
+                //meter los campos de TR34Params
                 .build();
         var encriptedPrivateKey = tr34EncryptionService.encrypt(keyPair.getPrivate(), tr34Params);
         try {
