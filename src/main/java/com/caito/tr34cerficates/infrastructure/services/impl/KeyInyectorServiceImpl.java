@@ -9,7 +9,10 @@ import com.caito.tr34cerficates.infrastructure.services.contracts.PKIService;
 import com.caito.tr34cerficates.infrastructure.services.contracts.TR34EncryptionService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+
+import java.util.concurrent.CompletableFuture;
 
 @Service
 @Slf4j
@@ -20,7 +23,8 @@ public class KeyInyectorServiceImpl implements KeyInyectionService {
     private final TR34EncryptionService tr34EncryptionService;
 
     @Override
-    public KeyInyectorResponse inyection(KeyInyectionRequest request) {
+    @Async
+    public CompletableFuture<KeyInyectorResponse> inyection(KeyInyectionRequest request) {
         log.info("--> key injection service with certificate");
         var keyPair = keyPairService.generateKeyPair();
         var certificate = pkiService.getCertificate(keyPair.getPublic(), request.getTerminalId());
@@ -35,6 +39,6 @@ public class KeyInyectorServiceImpl implements KeyInyectionService {
             //todo: hacer la captura de las excepciones necesarias
         }
 
-        return null;
+        return CompletableFuture.completedFuture(null);
     }
 }

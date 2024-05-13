@@ -16,7 +16,7 @@ public class KeyInyectorController {
     private final KeyInyectionService keyInyectionService;
 
     @PostMapping("/inyect")
-    public ResponseEntity<KeyInyectorResponse> inyect(@RequestBody KeyInyectionRequest request){
+    public ResponseEntity<?> inyect(@RequestBody KeyInyectionRequest request){
         log.info("--> endpoint POST key injection request");
         return ResponseEntity.ok().body(keyInyectionService.inyection(request));
     }
